@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: -webkit-fill-available;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -12,10 +16,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
 }
 
 .container {
@@ -73,6 +79,9 @@ body {
     outline: none;
     transition: all 0.3s ease;
     text-align: center;
+    /* 모바일 터치 최적화 */
+    -webkit-tap-highlight-color: rgba(102, 126, 234, 0.2);
+    touch-action: manipulation;
 }
 
 .input-field:focus {
@@ -82,6 +91,7 @@ body {
 
 .generate-btn {
     padding: 15px 30px;
+    min-height: 48px;
     font-size: 1.1rem;
     font-weight: 600;
     color: white;
@@ -91,6 +101,10 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    /* 모바일 터치 최적화 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    touch-action: manipulation;
+    user-select: none;
 }
 
 .generate-btn:hover {
@@ -202,25 +216,105 @@ body {
 
     .subtitle {
         font-size: 0.9rem;
+        line-height: 1.5;
     }
 
-    .input-field,
+    .input-field {
+        font-size: 16px; /* 자동 줌 방지 */
+        padding: 16px 20px;
+    }
+
     .generate-btn {
         font-size: 1rem;
+        padding: 16px 30px;
     }
 
     .result-content {
         font-size: 1.1rem;
         padding: 20px;
+        line-height: 1.8;
+    }
+
+    /* 터치 디바이스에서 hover 효과 비활성화 */
+    .generate-btn:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 15px;
+        padding: max(15px, env(safe-area-inset-top)) max(15px, env(safe-area-inset-right)) max(15px, env(safe-area-inset-bottom)) max(15px, env(safe-area-inset-left));
+    }
+
     .title {
         font-size: 1.75rem;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 25px;
     }
 
     .card {
         padding: 25px 15px;
+        border-radius: 16px;
+    }
+
+    .input-section {
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .input-field {
+        font-size: 16px;
+        padding: 14px 16px;
+    }
+
+    .generate-btn {
+        padding: 14px 24px;
+        min-height: 44px;
+    }
+
+    .result-title {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .result-content {
+        font-size: 1rem;
+        padding: 18px;
+        line-height: 1.9;
+    }
+
+    .loading-spinner {
+        padding: 30px 15px;
+    }
+
+    .error-section {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 20px 12px;
+    }
+
+    .input-field,
+    .generate-btn {
+        font-size: 16px;
+    }
+
+    .result-content {
+        font-size: 0.95rem;
+        padding: 15px;
     }
 }
