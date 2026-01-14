@@ -1,0 +1,25 @@
+{
+  "name": "threeline-acrostic-generator",
+  "version": "1.0.0",
+  "description": "삼행시 생성기 웹 앱 - Claude API를 사용한 AI 삼행시 생성",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "acrostic",
+    "poem",
+    "claude",
+    "ai",
+    "korean"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}
