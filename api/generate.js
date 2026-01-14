@@ -37,7 +37,11 @@ export default async function handler(req, res) {
         const apiKey = process.env.ANTHROPIC_API_KEY;
         if (!apiKey) {
             console.error('ANTHROPIC_API_KEY가 설정되지 않았습니다.');
-            return res.status(500).json({ error: '서버 설정 오류가 발생했습니다.' });
+            console.error('Vercel Dashboard > Settings > Environment Variables에서 ANTHROPIC_API_KEY를 설정해주세요.');
+            return res.status(500).json({
+                error: 'API 키가 설정되지 않았습니다. 관리자에게 문의해주세요.',
+                debug: process.env.NODE_ENV === 'development' ? 'ANTHROPIC_API_KEY environment variable is not set' : undefined
+            });
         }
 
         // Anthropic 클라이언트 생성
